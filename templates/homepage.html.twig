@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{%  block main_body %}
+
+    <p> Bienvenue {{ firstName|upper }} </p>
+
+    <ul>
+    {% for fruit,color in fruits  %}
+    <li>  {{fruit}} est de couleur {{color}}  </li>
+
+    {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block footer %}
+
+<ul class="link-list">
+    <li> 
+    <a class="button button-primary" href="{{ path('hello')}}">
+    Hello World </a> </li>
+     <li>  <a class="button button-primary" 
+       href="{{ path('hello', {firstname : 'Isabelle'})}}">
+    Dire Bonjour </a> </li>
+
+
+    <li>  <a class="button button-primary" 
+       href="{{ path('flickr_list') }}">
+    Flickr </a> </li>
+
+</ul>
+
+{% endblock %}

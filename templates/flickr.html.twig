@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+ {% block stylesheets %}
+ {{ parent()}}
+           <link rel="stylesheet" href="{{ asset("lightbox2/css/lightbox.css") }}">
+        {% endblock %}
+
+        {% block javascripts %}
+           <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="{{ asset("lightbox2/js/lightbox.js") }}"></script>
+        {% endblock %}
+{%  block main_body %}
+
+<form class="generic-form" action="{{ path('flickr_list')}}"
+ method="post">
+
+<fieldlset>
+<legend>Recherche Flickr</legend>
+    <ul>
+    <li> <label for="taglist">Tags</label></li>
+        <li><input type="text" id="taglist" name="search" ></li>
+        <li><button class="button button-primary" type="submit">
+        Rechercher</button></li>
+    </ul>
+</fieldlset>
+
+</form>
+{% if flickrPhotos is defined %}
+    {% if flickrPhotos is empty %}
+        <p> Aucune resultat trouvé </p>
+    {% else %}
+    <ul class="link-list photos">
+    
+    {% for flickrPhoto in flickrPhotos %}
+    <li>    
+     <a href="{{ flickrPhoto.bigUrl }}" data-lightbox="flickr" data-title="{{ flickrPhoto.title }}">
+                            <img src="{{ flickrPhoto.thumbnailUrl }}" alt="{{ flickrPhoto.title }}">
+                            {# Twig va automatiquement appeler la méthode getThumbnailUrl() de la classe FlickrPhoto #}
+                        </a>
+    </li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+{% endif %}
+
+
+
+{% endblock %}
+
