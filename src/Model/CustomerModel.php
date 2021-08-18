@@ -23,4 +23,21 @@ class CustomerModel
 
         return $database->query($sql, [$country]);
     }
+
+    public function ByCountry($country)
+    {
+        $database = new Database();
+
+        $sql = 'SELECT
+                    customerName,
+                    contactLastName,
+                    contactFirstName,
+                    addressLine1,
+                    addressLine2,
+                    city
+                FROM customers
+                WHERE country LIKE ?';
+
+        return $database->query($sql, [$country]);
+    }
 }
